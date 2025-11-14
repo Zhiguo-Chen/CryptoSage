@@ -1,0 +1,42 @@
+system:
+  name: "BTC Smart Agent System"
+  version: "1.0.0"
+
+agents:
+  technical:
+    - name: "TechAgent-OpenAI"
+      model: "gpt-4"
+      weight: 0.5
+    - name: "TechAgent-Gemini"
+      model: "gemini-2.0-flash-exp"
+      weight: 0.5
+
+  news:
+    - name: "NewsAgent-OpenAI"
+      model: "gpt-4"
+      weight: 0.4
+    - name: "NewsAgent-Gemini"
+      model: "gemini-2.0-flash-exp"
+      weight: 0.4
+    - name: "RAGAgent"
+      weight: 0.2
+
+decision:
+  confidence_threshold: 0.8
+  human_review_threshold: 0.6
+  discussion_rounds: 3
+
+data_sources:
+  price:
+    - okx
+    - binance
+  news:
+    - cryptopanic
+    - coindesk
+    - reuters
+
+schedule:
+  price_update: "*/5 * * * *" # Every 5 minutes
+  news_update: "*/15 * * * *" # Every 15 minutes
+  analysis: "0 * * * *" # Every hour
+  evaluation: "0 0 * * *" # Daily
